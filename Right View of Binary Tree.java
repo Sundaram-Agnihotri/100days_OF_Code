@@ -9,6 +9,7 @@ class Solution{
         right (node.left, list, level+1);
     }
     //Function to return list containing elements of right view of binary tree.
+    
     ArrayList<Integer> rightView(Node node) {
         ArrayList<Integer> list = new ArrayList<>();
         right(node, list, 0);
