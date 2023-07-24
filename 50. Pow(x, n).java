@@ -3,3 +3,4 @@ class Solution {
         return Math.pow(x,n);
     }
 }
+
