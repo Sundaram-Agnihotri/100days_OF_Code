@@ -20,6 +20,7 @@ class Solution
         while (curr!=null){
             if(zero!=0){
                 curr.data=0;
+                
                 zero--;
             }
             else if(one!=0){
