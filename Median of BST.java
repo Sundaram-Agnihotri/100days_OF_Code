@@ -23,6 +23,5 @@ class Tree
         }
         else 
         return list.get(size/2);
-        
     }
 }
