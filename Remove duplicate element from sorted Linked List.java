@@ -8,7 +8,6 @@ class Node
         Node(int d) {data = d; next = null; }
     }
 */
-
 class GfG
 {
     //Function to remove duplicates from sorted linked list.
