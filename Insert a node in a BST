@@ -1,0 +1,22 @@
+      Node* insert(Node* node, int data) {
+        
+            // Your code goes here
+            if(node == NULL){
+                Node* root = new Node(data);
+                return root;
+            }
+            
+            if(node->data == data){
+                return node;
+            }
+            
+            if(node->data >= data){
+                node->left = insert(node->left,data);
+            }
+            
+            if(node->data < data){
+                node->right = insert(node->right,data);
+            }
+            
+            return node;
+    }
