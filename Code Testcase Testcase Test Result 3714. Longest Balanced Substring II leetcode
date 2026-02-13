@@ -1,0 +1,96 @@
+//only characters allowed a,b,c
+class Solution {
+public:
+
+    int helper(string&s,int ch1,int ch2){
+         int n = s.length();
+         unordered_map<int,int>mp;
+         int maxi = 0;
+         int cnt1 = 0 ;
+         int cnt2 = 0;
+
+         for(int i=0;i<n;i++){
+            if(s[i]!=ch1 && s[i]!=ch2){
+                mp.clear();
+                cnt1 = 0;
+                cnt2 = 0;
+                continue;
+            }
+
+            if(s[i]==ch1){
+                cnt1++;
+            }
+            if(s[i]==ch2){
+                cnt2++;
+            }
+
+            if(cnt1 == cnt2){
+                maxi = max(maxi,cnt1+cnt2);
+            }
+
+            int diff = cnt1 - cnt2;
+            if(mp.count(diff)){
+                maxi = max(maxi,i-mp[diff]);
+            }else{
+                mp[diff] = i;
+            }
+         }
+         return maxi;
+        
+    }
+    int longestBalanced(string s) {
+        //case 1 : if all the characters are same
+        int n = s.length();
+        int maxi = 0;
+        int cnt = 1;       
+          unordered_map<string,int>mp;
+
+        for(int i=1;i<n;i++){
+            if(s[i]==s[i-1]){
+                cnt++;
+            }else{
+                maxi = max(maxi,cnt);
+                cnt  = 1;
+            }
+        }
+
+        maxi = max(maxi,cnt);
+
+        //case 2: if two characters are same appear in string
+        maxi = max(maxi,helper(s,'a','b'));
+        maxi = max(maxi,helper(s,'a','c'));
+        maxi = max(maxi,helper(s,'b','c'));
+
+        //case 3
+        int cntA = 0;
+        int cntB = 0;
+        int cntC = 0;
+
+        for(int i=0;i<n;i++){
+            if(s[i]=='a'){
+                cntA++;
+            }
+            if(s[i]=='b'){
+                cntB++;
+            }
+            if(s[i]=='c'){
+                cntC++;
+            }
+
+            if(cntA == cntB && cntB == cntC){
+                maxi = max(maxi,cntA + cntB + cntC);
+            }
+
+            int diffAB = cntA-cntB;
+            int diffAC = cntA - cntC;
+
+            string key = to_string(diffAB)+"_"+to_string(diffAC);
+            if(mp.count(key)){
+                maxi = max(maxi,i-mp[key]);
+            }else{
+                mp[key] = i;
+            }
+        }
+        return maxi;
+    }
+};
